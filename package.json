@@ -1,0 +1,24 @@
+{
+  "name": "mean-app",
+  "version": "0.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "start:docker:dev": "docker-compose -f compose/docker-compose.dev.yml up",
+    "stop:docker:dev": "docker-compose -f compose/docker-compose.dev.yml down",
+    "start:docker:prod": "docker-compose -f compose/docker-compose.prod.yml up",
+    "stop:docker:prod": "docker-compose -f compose/docker-compose.prod.yml down",
+    "build:docker": "docker-compose -f compose/docker-compose.build.yml up --build",
+    "build:docker:stop": "docker-compose -f compose/docker-compose.build.yml down"
+  },
+  "author": "Maxime Pierre",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "jsonwebtoken": "^7.4.1",
+    "mongodb": "^3.0.2",
+    "mongoose": "^4.13.11"
+  }
+}

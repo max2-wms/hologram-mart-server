@@ -1,0 +1,70 @@
+version: '3.3'
+
+services:
+
+  portainer:
+    container_name: MEAN_portainer
+    # TODO: pin down a specific version of portainer
+    image: portainer/portainer
+    ports:
+      - '9000:9000'
+    networks:
+      - frontend
+      - backend
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    depends_on:
+      - db
+      - server
+      - client
+
+  client:
+    container_name: MEAN_client
+    # TODO: might want to pin down a specific version of this image
+    # TODO: create a Dockerfile for this image
+    image: max2wms/angular-dev-env
+    volumes:
+      - ../../client:/app
+    ports:
+      - "4200:4200"
+    networks:
+      - frontend
+    command: ng serve -H 0.0.0.0
+    depends_on:
+      - server
+
+  server:
+    container_name: MEAN_server
+    # TODO: might want to pin down a specific version of this image
+    # TODO: create a Dockerfile for this image
+    image: max2wms/angular-dev-env
+    volumes:
+      - ..:/app
+    ports:
+      - "63145:63145"
+    networks:
+      - backend
+      - frontend
+    command: bash -c "NODE_ENV=docker nodemon"
+    depends_on:
+      - db
+
+  db:
+    container_name: MEAN_db
+    # TODO: pin down a specific version of mongo
+    image: mongo
+    environment:
+      - MONGO_DATA_DIR=/data/db
+      - MONGO_LOG_DIR=/dev/null
+    volumes:
+      - "mongo_db:/data/db"
+    networks:
+      - backend
+    command: mongod --smallfiles --logpath=/dev/null # --quiet
+
+networks:
+  backend:
+  frontend:
+
+volumes:
+  mongo_db:
