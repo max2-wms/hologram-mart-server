@@ -34,15 +34,16 @@ app.use('/api', api);
 app.use('/auth', auth);
 
 // Hologram API
+// List of Celebrity Holograms
 api.get('/holograms', (req, res) => {
     // Getting documents from MongoDB
-    User.find().exec((err, users) => {
+    Hologram.find().exec((err, hologram) => {
         if (!err) {
             // Sending 200 status code
             res.status(200);
 
-            // Sending back list of messages sorted in reverse chronological order
-            return res.json(users);
+            // Sending back list of holograms
+            return res.json(hologram);
         } else {
             // Sending 500 status code
             res.status(500);
@@ -53,15 +54,16 @@ api.get('/holograms', (req, res) => {
     });
 });
 
+// Find a Celebrity Hologram by ID
 api.get('/holograms/:hologramid', (req, res) => {
     // Getting documents from MongoDB
-    User.find({'_id': req.params.userid}).exec((err, user) => {
+    Hologram.find({'_id': req.params.hologramid}).exec((err, hologram) => {
         if (!err) {
             // Sending 200 status code
             res.status(200);
 
-            // returns user
-            return res.json(user[0]);
+            // returns hologram
+            return res.json(hologram[0]);
         } else {
             // Sending 500 status code
             res.status(500);
@@ -72,11 +74,12 @@ api.get('/holograms/:hologramid', (req, res) => {
     });
 });
 
+// Add a Celebrity Hologram
 api.post('/holograms', (req, res) => {
-    // saves new message
+    // saves new hologram
     let newHologram = req.body;
 
-    // Saving new message in MongoDB Database
+    // Saving new hologram in MongoDB Database
     let hologram = new Hologram(newHologram);
 
     hologram.save((err) => {
@@ -96,15 +99,16 @@ api.post('/holograms', (req, res) => {
     });
 });
 
-api.delete('/holograms/:hologramid', (req, res) => {
+// Delete a Celebrity Hologram by ID
+api.post('/holograms/:hologramid', (req, res) => {
     // Getting documents from MongoDB
-    User.find({'_id': req.params.userid}).exec((err, user) => {
+    Hologram.deleteOne({'_id': req.params.hologramid}).exec((err, hologram) => {
         if (!err) {
             // Sending 200 status code
             res.status(200);
 
-            // returns user
-            return res.json(user[0]);
+            // returns success message to client
+            return res.end('hologram successfully deleted');
         } else {
             // Sending 500 status code
             res.status(500);

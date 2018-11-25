@@ -16,22 +16,22 @@ services:
     depends_on:
       - db
       - server
-      - client
+      # - client
 
-  client:
-    container_name: MEAN_client
-    # TODO: might want to pin down a specific version of this image
-    # TODO: create a Dockerfile for this image
-    image: max2wms/angular-dev-env
-    volumes:
-      - ../../client:/app
-    ports:
-      - "4200:4200"
-    networks:
-      - frontend
-    command: ng serve -H 0.0.0.0
-    depends_on:
-      - server
+  # client:
+  #   container_name: MEAN_client
+  #   # TODO: might want to pin down a specific version of this image
+  #   # TODO: create a Dockerfile for this image
+  #   image: max2wms/angular-dev-env
+  #   volumes:
+  #     - ../../client:/app
+  #   ports:
+  #     - "4200:4200"
+  #   networks:
+  #     - frontend
+  #   command: ng serve -H 0.0.0.0
+  #   depends_on:
+  #     - server
 
   server:
     container_name: MEAN_server
