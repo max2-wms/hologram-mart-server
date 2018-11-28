@@ -3,7 +3,7 @@ version: '3.3'
 services:
 
   portainer:
-    container_name: MEAN_portainer
+    container_name: HM_portainer
     # TODO: pin down a specific version of portainer
     image: portainer/portainer
     ports:
@@ -19,7 +19,7 @@ services:
       # - client
 
   # client:
-  #   container_name: MEAN_client
+  #   container_name: HM_client
   #   # TODO: might want to pin down a specific version of this image
   #   # TODO: create a Dockerfile for this image
   #   image: max2wms/angular-dev-env
@@ -29,12 +29,12 @@ services:
   #     - "4200:4200"
   #   networks:
   #     - frontend
-  #   command: ng serve -H 0.0.0.0
+  #   command: ng serve
   #   depends_on:
   #     - server
 
   server:
-    container_name: MEAN_server
+    container_name: HM_server
     # TODO: might want to pin down a specific version of this image
     # TODO: create a Dockerfile for this image
     image: max2wms/angular-dev-env
@@ -50,7 +50,7 @@ services:
       - db
 
   db:
-    container_name: MEAN_db
+    container_name: HM_db
     # TODO: pin down a specific version of mongo
     image: mongo
     environment:

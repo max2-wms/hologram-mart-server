@@ -6,18 +6,14 @@ services:
     image: portainer/portainer
     ports:
       - '9000:9000'
-    networks:
-      - frontend
-      - backend
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     depends_on:
       - db
       - server
-      - client
 
   server:
-    image: MEAN_server
+    image: max2wms/hologram-mart
     ports:
       - "63145:63145"
     depends_on:
@@ -32,8 +28,6 @@ services:
       - "mongo_db:/data/db"
     ports:
       - "27017:27017"
-    networks:
-      - backend
     command: mongod --smallfiles --logpath=/dev/null # --quiet
 
 volumes:
