@@ -41,7 +41,7 @@ the `sudo` command.
 
 In a command shell, make a clone of the git repository:
 
-`$ git clone git@github.com:max2-wms/node-backend.git server`
+`$ git clone https://github.com/max2-wms/hologram-mart-server.git server`
 
 Then enter the directory created. All further commands will be run inside that directory.
 
