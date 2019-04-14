@@ -42,5 +42,5 @@ services:
 volumes:
   mongo_db:
 
-  networks:
+networks:
   hologram_mart:

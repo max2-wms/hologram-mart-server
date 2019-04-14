@@ -214,14 +214,16 @@ app.get('*', (req, res) => {
     res.redirect('/');
 });
 
-// Launch MongoDB Server
-mongoose.connect(`${environment.MongoDB_URL}/${environment.dbName}`, { useMongoClient: true }, (err, db) => {
-    if (!err) {
-        console.log(`MongoDB server listening @ ${environment.MongoDB_URL}`);
-    } else {
-        console.log(`${err}...`);
-    }
-});
+setTimeout(() => {
+    // Launch MongoDB Server
+    mongoose.connect(`${environment.MongoDB_URL}/${environment.dbName}`, { useMongoClient: true }, (err, db) => {
+        if (!err) {
+            console.log(`MongoDB server listening @ ${environment.MongoDB_URL}`);
+        } else {
+            console.log(`${err}...`);
+        }
+    });
+}, 10000);
 
 
 // Launch Node Server in http mode
