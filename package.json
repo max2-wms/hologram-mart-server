@@ -14,7 +14,7 @@
     "swarm:init": "docker swarm init",
     "swarm:leave": "docker swarm leave --force",
     "node:ls": "docker node ls",
-    "deploy:stack": "docker deploy -c compose/docker-compose.stack.yml hologram-mart",
+    "deploy:stack": "docker stack deploy -c compose/docker-compose.stack.yml hologram-mart",
     "undeploy:stack": "docker stack rm hologram-mart",
     "stack:ls": "docker stack ls"
   },

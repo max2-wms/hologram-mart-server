@@ -3,7 +3,6 @@ version: '3.3'
 services:
 
   viz:
-    container_name: viz
     image: dockersamples/visualizer
     ports:
       - '8080:8080'
@@ -17,7 +16,6 @@ services:
       - portainer
 
   portainer:
-    container_name: portainer
     image: portainer/portainer
     ports:
       - '9000:9000'
@@ -31,7 +29,6 @@ services:
       - viz
 
   server:
-    container_name: server
     image: max2wms/hologram-mart
     ports:
       - '63145:63145'
@@ -41,7 +38,6 @@ services:
       - db
 
   db:
-    container_name: db
     image: 'mongo'
     ports:
       - '27017:27017'
