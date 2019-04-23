@@ -31,7 +31,7 @@ services:
   server:
     image: max2wms/hologram-mart
     ports:
-      - '63145:63145'
+      - '80:63145'
     networks:
       - hologram_mart
     depends_on:

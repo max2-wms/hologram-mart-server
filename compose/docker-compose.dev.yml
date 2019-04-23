@@ -41,7 +41,7 @@ services:
     volumes:
       - ..:/app
     ports:
-      - "63145:63145"
+      - "80:63145"
     networks:
       - backend
       - frontend
