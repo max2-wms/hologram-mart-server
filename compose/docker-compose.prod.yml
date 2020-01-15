@@ -37,7 +37,7 @@ services:
       - "27017:27017"
     networks:
       - hologram_mart
-    command: mongod --smallfiles --logpath=/dev/null # --quiet
+    command: mongod --logpath=/dev/null # --quiet
 
 volumes:
   mongo_db:

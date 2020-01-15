@@ -48,7 +48,7 @@ services:
       - 'mongo_db:/data/db'
     networks:
       - hologram_mart
-    command: mongod --smallfiles --logpath=/dev/null
+    command: mongod --logpath=/dev/null
 
 volumes:
   mongo_db:

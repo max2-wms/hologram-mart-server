@@ -60,7 +60,7 @@ services:
       - "mongo_db:/data/db"
     networks:
       - backend
-    command: mongod --smallfiles --logpath=/dev/null # --quiet
+    command: mongod --logpath=/dev/null # --quiet
 
 networks:
   backend:
