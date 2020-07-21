@@ -2,22 +2,8 @@ version: '3.3'
 
 services:
 
-  portainer:
-    # TODO: pin down a specific version of portainer
-    container_name: portainer
-    image: portainer/portainer
-    ports:
-      - '9000:9000'
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    networks:
-      - hologram_mart
-    depends_on:
-      - db
-      - server
-
-  server:
-    container_name: server
+  hologram-mart:
+    container_name: hologram-mart
     build: ..
     image: max2wms/hologram-mart
     ports:
@@ -28,16 +14,14 @@ services:
       - db
 
   db:
-    # TODO: pin down a specific version of mongo
     container_name: db
+    # TODO: pin down a specific version of mongo
     image: mongo
     environment:
       - MONGO_DATA_DIR=/data/db
       - MONGO_LOG_DIR=/dev/null
     volumes:
       - "mongo_db:/data/db"
-    ports:
-      - "27017:27017"
     networks:
       - hologram_mart
     command: mongod --logpath=/dev/null # --quiet

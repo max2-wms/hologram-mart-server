@@ -28,7 +28,8 @@ services:
       - server
       - viz
 
-  server:
+  hologram-mart:
+    container_name: hologram-mart
     image: max2wms/hologram-mart
     ports:
       - '80:63145'
@@ -38,9 +39,9 @@ services:
       - db
 
   db:
-    image: 'mongo'
-    ports:
-      - '27017:27017'
+    container_name: db
+    # TODO: pin down a specific version of mongo
+    image: mongo
     environment:
       - MONGO_DATA_DIR=/data/db
       - MONGO_LOG_DIR=/dev/null
@@ -48,7 +49,7 @@ services:
       - 'mongo_db:/data/db'
     networks:
       - hologram_mart
-    command: mongod --logpath=/dev/null
+    command: mongod --logpath=/dev/null # --quiet
 
 volumes:
   mongo_db:

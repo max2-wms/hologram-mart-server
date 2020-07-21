@@ -2,39 +2,8 @@ version: '3.3'
 
 services:
 
-  portainer:
-    container_name: HM_portainer
-    # TODO: pin down a specific version of portainer
-    image: portainer/portainer
-    ports:
-      - '9000:9000'
-    networks:
-      - frontend
-      - backend
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    depends_on:
-      - db
-      - server
-      # - client
-
-  # client:
-  #   container_name: HM_client
-  #   # TODO: might want to pin down a specific version of this image
-  #   # TODO: create a Dockerfile for this image
-  #   image: max2wms/angular-dev-env
-  #   volumes:
-  #     - ../../client:/app
-  #   ports:
-  #     - "4200:4200"
-  #   networks:
-  #     - frontend
-  #   command: ng serve
-  #   depends_on:
-  #     - server
-
-  server:
-    container_name: HM_server
+  hologram-mart:
+    container_name: hologram-mart
     # TODO: might want to pin down a specific version of this image
     # TODO: create a Dockerfile for this image
     image: max2wms/angular-dev-env
@@ -43,14 +12,13 @@ services:
     ports:
       - "80:63145"
     networks:
-      - backend
-      - frontend
+      - hologram_mart
     command: bash -c "NODE_ENV=docker nodemon"
     depends_on:
       - db
 
   db:
-    container_name: HM_db
+    container_name: db
     # TODO: pin down a specific version of mongo
     image: mongo
     environment:
@@ -59,12 +27,11 @@ services:
     volumes:
       - "mongo_db:/data/db"
     networks:
-      - backend
+      - hologram_mart
     command: mongod --logpath=/dev/null # --quiet
-
-networks:
-  backend:
-  frontend:
 
 volumes:
   mongo_db:
+
+networks:
+  hologram_mart:
