@@ -30,7 +30,7 @@
     "express": "^4.15.3",
     "jsonwebtoken": "^7.4.1",
     "mongodb": "^3.0.2",
-    "mongoose": "^4.13.11"
+    "mongoose": "^5.7.5"
   },
   "devDependencies": {
     "husky": "^4.2.5",
