@@ -28,13 +28,25 @@ services:
       - server
       - viz
 
-  hologram-mart:
-    container_name: hologram-mart
-    image: max2wms/hologram-mart
+  hologram-mart-client:
+    container_name: hologram-mart-client
+    image: max2wms/hologram-mart-client
     ports:
-      - '80:63145'
+      - '443:443'
+      - '80:80'
     networks:
       - hologram_mart
+    depends_on:
+      - hologram-mart-server
+
+  hologram-mart-server:
+    container_name: hologram-mart-server
+    image: max2wms/hologram-mart-server
+    ports:
+      - '63145:63145'
+    networks:
+      - hologram_mart
+    command: bash -c "NODE_ENV=docker node server"
     depends_on:
       - db
 

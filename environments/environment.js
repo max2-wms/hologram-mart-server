@@ -17,6 +17,7 @@ switch ( process.env.NODE_ENV ) {
                         break;
 }
 
+environment.https = process.env.security_mode ? (process.env.security_mode === 'https') : true;
 environment.portNumber = 63145;
 environment.dbName = 'tsn2';
 

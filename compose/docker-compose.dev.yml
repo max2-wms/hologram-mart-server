@@ -2,15 +2,28 @@ version: '3.3'
 
 services:
 
-  hologram-mart:
-    container_name: hologram-mart
+  hologram-mart-client:
+    container_name: hologram-mart-client
+    image: max2wms/hologram-mart-client
+    volumes:
+      - ../client:/app
+    ports:
+      - '443:443'
+      - '80:80'
+    networks:
+      - hologram_mart
+    depends_on:
+      - hologram-mart-server
+
+  hologram-mart-server:
+    container_name: hologram-mart-server
     # TODO: might want to pin down a specific version of this image
     # TODO: create a Dockerfile for this image
     image: max2wms/angular-dev-env
     volumes:
       - ..:/app
     ports:
-      - "80:63145"
+      - "63145:63145"
     networks:
       - hologram_mart
     command: bash -c "NODE_ENV=docker nodemon"

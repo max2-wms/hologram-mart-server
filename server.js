@@ -4,6 +4,9 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const utils = require('./utils');
 const environment = require('./environments/environment.js');
+const fs = require('fs');
+const https = require('https');
+const path = require('path');
 
 // app definition
 const app = express();
@@ -23,6 +26,7 @@ app.use(bodyParser.json());
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+    res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
     next();
 });
 
@@ -225,8 +229,23 @@ setTimeout(() => {
     });
 }, 10000);
 
+if (environment.https) {
 
-// Launch Node Server in http mode
-const server = app.listen(environment.portNumber, () => {
-    console.log(`Express Server listening on port ${server.address().port}`);
-});
+    const httpsOptions = {
+        cert: fs.readFileSync(path.join('/app/certs/', 'fullchain1.pem')),
+        key: fs.readFileSync(path.join('/app/certs/', 'privkey1.pem'))
+    }
+
+    // Launch Node Server in https mode
+    const server = https.createServer(httpsOptions, app).listen(environment.portNumber, () => {
+        console.log(`Express Server listening on port ${server.address().port} in secure mode...`);
+    })
+
+} else {
+
+    // Launch Node Server in http mode
+    const server = app.listen(environment.portNumber, () => {
+        console.log(`Express Server listening on port ${server.address().port} in unsecure mode...`);
+    });
+
+}
