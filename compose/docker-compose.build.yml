@@ -22,7 +22,6 @@ services:
       - "63145:63145"
     networks:
       - hologram_mart
-    command: bash -c "NODE_ENV=docker node server"
     depends_on:
       - db
 
