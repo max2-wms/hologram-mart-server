@@ -28,7 +28,7 @@ services:
       - server
       - viz
 
-  hologram-mart-client:
+  client:
     container_name: hologram-mart-client
     image: max2wms/hologram-mart-client
     ports:
@@ -37,9 +37,9 @@ services:
     networks:
       - hologram_mart
     depends_on:
-      - hologram-mart-server
+      - server
 
-  hologram-mart-server:
+  server:
     container_name: hologram-mart-server
     image: max2wms/hologram-mart-server
     ports:

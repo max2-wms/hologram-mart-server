@@ -6,7 +6,7 @@ read -p ">> do you wish to initiate swarm: ( Y/N ) " INITIATE_SWARM
 eval $(docker-machine env hologram-mart)
 
 # Build new image
-docker build -t max2wms/hologram-mart .
+# docker build -t max2wms/hologram-mart-server .
 
 if [ "${INITIATE_SWARM}" == "Y" ]
 then

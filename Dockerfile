@@ -15,4 +15,4 @@ COPY . .
 
 EXPOSE 63145
 
-CMD ["NODE_ENV=docker", "security_mode=http", "node server"]
+CMD ["NODE_ENV=docker", "node server"]
