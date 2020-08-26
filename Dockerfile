@@ -1,4 +1,4 @@
-FROM node:latest
+FROM node
 
 LABEL maintainer="Maxime Pierre <max@webmediasolutionz.com>"
 
